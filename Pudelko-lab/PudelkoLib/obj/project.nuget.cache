@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hw0K4cXKk6Q1hPiA/SNnxDgNPq+GnqSgRVH13zAAoo5+Yk2EtGtum/fA3qn2cyyG32ubNPQoEBQJPQUA6qZExg==",
+  "dgSpecHash": "LD4ypXgxSeGqbigTO7bkkuhCBMnskqc8Vxx2JK9ZV1N85xav3PpUupjZlnc4V/vn4vlvvCMVvJgVWYhycdQOmg==",
   "success": true,
   "projectFilePath": "C:\\Users\\48601\\Desktop\\Studia 3 Semestr\\Programowanie Obiekowe\\Pudelko\\Pudelko-lab\\PudelkoLib\\PudelkoLib.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\48601\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\48601\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

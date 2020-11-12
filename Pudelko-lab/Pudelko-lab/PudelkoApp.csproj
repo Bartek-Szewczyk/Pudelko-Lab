@@ -5,5 +5,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Pudelko_lab</RootNamespace>
   </PropertyGroup>
+	    
+
+  <ItemGroup>
+    <ProjectReference Include="..\PudelkoLib\PudelkoLib.csproj" />
+  </ItemGroup>
 
 </Project>

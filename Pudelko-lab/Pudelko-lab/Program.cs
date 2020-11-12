@@ -1,12 +1,14 @@
 ﻿using System;
+using PudelkoLib;
 
 namespace Pudelko_lab
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("Hello World!");
+           Pudelko p1 = new Pudelko(10,4,8, UnitOfMeasure.centimeter);
+           Console.WriteLine(p1.ToString());
         }
     }
 }
