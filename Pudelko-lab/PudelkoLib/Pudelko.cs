@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Drawing;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
+
 
 namespace PudelkoLib
 {
@@ -90,6 +92,7 @@ namespace PudelkoLib
                     break;
             }
 
+            _unit = unit;
             CheckRange(A, B, C);
         }
 
@@ -162,11 +165,61 @@ namespace PudelkoLib
             get => Math.Round(2 * (A * B + A * C + B * C), 6);
         }
 
-
         public bool Equals(Pudelko other)
         {
-            throw new NotImplementedException();
+            if (ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            return Objetosc==other.Objetosc && Pole==other.Pole;
         }
+
+        public override bool Equals(Object obj)
+        {
+            return Equals(obj as Pudelko);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (A, B, C).GetHashCode();
+            }
+           
+        }
+
+
+        public static bool operator ==(Pudelko p1, Pudelko p2)
+        {
+            if (Pudelko.ReferenceEquals(p1, null))
+            {
+                if (Pudelko.ReferenceEquals(p2, null))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return p1.Equals(p1);
+        }
+
+        public static bool operator !=(Pudelko p1, Pudelko p2)
+        {
+            return !(p1.Equals(p2));
+        }
+
+        public static Pudelko operator +(Pudelko p1, Pudelko p2)
+        {
+
+            return null;
+        }
+
+
 
         public IEnumerator GetEnumerator()
         {
@@ -174,8 +227,5 @@ namespace PudelkoLib
         }
     }
 
-    public enum UnitOfMeasure
-    {
-        milimeter, centimeter, meter
-    }
+    
 }

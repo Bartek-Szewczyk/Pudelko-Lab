@@ -181,7 +181,7 @@ namespace PudelkoUnitTests
         [DataRow(11, 0.011)]
         [DataRow(100.1, 0.1)]
         [DataRow(200.19, 0.2)]
-         public void Constructor_1param_InMilimeters(double a, double expectedA)
+        public void Constructor_1param_InMilimeters(double a, double expectedA)
         {
             Pudelko p = new Pudelko(unit: UnitOfMeasure.milimeter, a: a);
 
@@ -445,18 +445,18 @@ namespace PudelkoUnitTests
         #region Pole, Objêtoœæ ===================================
         // ToDo
         [DataTestMethod, TestCategory("Objectosc Properties")]
-        [DataRow(1,1,1,1)]
-        [DataRow(3.1,8.67,2.543,68.348211)]
+        [DataRow(1, 1, 1, 1)]
+        [DataRow(3.1, 8.67, 2.543, 68.348211)]
         public void Objetosc_Meter(double a, double b, double c, double expectedObjetosc)
         {
-            var p = new Pudelko(a,b,c, unit: UnitOfMeasure.meter);
+            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.meter);
             Assert.AreEqual(expectedObjetosc, p.Objetosc);
 
         }
         [DataTestMethod, TestCategory("Objectosc Properties")]
         [DataRow(9, 15, 231, 0.031185)]
         [DataRow(3.5, 29.8, 89.2, 0.00930356)]
-        [DataRow(2.5,7.6,9.1, 0.0001729)]
+        [DataRow(2.5, 7.6, 9.1, 0.0001729)]
         public void Objetosc_Centimeter(double a, double b, double c, double expectedObjetosc)
         {
             var p = new Pudelko(a, b, c, unit: UnitOfMeasure.centimeter);
@@ -466,7 +466,7 @@ namespace PudelkoUnitTests
         [DataTestMethod, TestCategory("Objectosc Properties")]
         [DataRow(9, 2543, 71, 0.001624977)]
         [DataRow(8491, 5624, 7539, 360.012761976)]
-        [DataRow(7462,6835,1048, 53.45090296)]
+        [DataRow(7462, 6835, 1048, 53.45090296)]
         public void Objetosc_Milimeter(double a, double b, double c, double expectedObjetosc)
         {
             var p = new Pudelko(a, b, c, unit: UnitOfMeasure.milimeter);
@@ -484,7 +484,7 @@ namespace PudelkoUnitTests
 
         }
         [DataTestMethod, TestCategory("Objectosc Properties")]
-        [DataRow(100,100,100,6)]
+        [DataRow(100, 100, 100, 6)]
         [DataRow(3.5, 29.8, 89.2, 0.614932)]
         public void Pole_Centimeter(double a, double b, double c, double expectedObjetosc)
         {
@@ -509,11 +509,35 @@ namespace PudelkoUnitTests
 
         #region Equals ===========================================
         // ToDo
+        [TestMethod, TestCategory("Equals")]
+
+        public void Equals()
+        {
+            Pudelko p1 = new Pudelko();
+            Pudelko p2 = new Pudelko(10,12, unit: UnitOfMeasure.centimeter);
+            Pudelko p3 = new Pudelko(100, unit: UnitOfMeasure.milimeter);
+            
+
+            Assert.IsTrue(p1.Equals(p3));
+            Assert.IsFalse(p1.Equals(p2));
+
+
+        }
+        
+        [TestMethod, TestCategory("Equals")]
+        public void Equals_Operators()
+        {
+            Pudelko p1 = new Pudelko();
+            Pudelko p2 = new Pudelko(100, 100, 100, UnitOfMeasure.milimeter);
+            Pudelko p3 = new Pudelko(9, 18, unit: UnitOfMeasure.centimeter);
+            Assert.IsTrue(p1 == p2);
+            Assert.IsTrue(p2 != p3);
+        }
         #endregion
 
         #region Operators overloading ===========================
         //ToDo
-        #endregion
+        #endregion 
 
         //#region Conversions =====================================
         //[TestMethod]
