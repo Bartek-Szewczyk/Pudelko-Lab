@@ -175,7 +175,7 @@ namespace PudelkoLib
             {
                 return true;
             }
-            return Objetosc==other.Objetosc && Pole==other.Pole;
+            return Objetosc == other.Objetosc && Pole == other.Pole;
         }
 
         public override bool Equals(Object obj)
@@ -189,7 +189,7 @@ namespace PudelkoLib
             {
                 return (A, B, C).GetHashCode();
             }
-           
+
         }
 
 
@@ -215,10 +215,25 @@ namespace PudelkoLib
 
         public static Pudelko operator +(Pudelko p1, Pudelko p2)
         {
+            double[] dim1 = new[] { p1.A, p1.B, p1.C };
+            double[] dim2 = new[] { p2.A, p2.B, p2.C };
+            Array.Sort(dim1);
+            Array.Sort(dim2);
+            double a = dim1[0] + dim2[0];
+            double b = GraterValue(dim1[1], dim2[1]);
+            double c = GraterValue(dim1[2], dim2[2]);
+            Pudelko p3 = new Pudelko(a, b, c);
 
-            return null;
+            return p3;
         }
 
+        private static double GraterValue(double a, double b)
+        {
+            if (a > b)
+                return a;
+            else
+                return b;
+        }
 
 
         public IEnumerator GetEnumerator()
@@ -227,5 +242,5 @@ namespace PudelkoLib
         }
     }
 
-    
+
 }

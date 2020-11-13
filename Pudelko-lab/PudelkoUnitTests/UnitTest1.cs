@@ -449,7 +449,7 @@ namespace PudelkoUnitTests
         [DataRow(3.1, 8.67, 2.543, 68.348211)]
         public void Objetosc_Meter(double a, double b, double c, double expectedObjetosc)
         {
-            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.meter);
+            var p = new Pudelko(a, b, c);
             Assert.AreEqual(expectedObjetosc, p.Objetosc);
 
         }
@@ -459,7 +459,7 @@ namespace PudelkoUnitTests
         [DataRow(2.5, 7.6, 9.1, 0.0001729)]
         public void Objetosc_Centimeter(double a, double b, double c, double expectedObjetosc)
         {
-            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.centimeter);
+            var p = new Pudelko(a, b, c,  UnitOfMeasure.centimeter);
             Assert.AreEqual(expectedObjetosc, p.Objetosc);
 
         }
@@ -469,7 +469,7 @@ namespace PudelkoUnitTests
         [DataRow(7462, 6835, 1048, 53.45090296)]
         public void Objetosc_Milimeter(double a, double b, double c, double expectedObjetosc)
         {
-            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.milimeter);
+            var p = new Pudelko(a, b, c,  UnitOfMeasure.milimeter);
             Assert.AreEqual(expectedObjetosc, p.Objetosc);
 
         }
@@ -479,7 +479,7 @@ namespace PudelkoUnitTests
         [DataRow(3.1, 8.67, 2.543, 113.61622)]
         public void Pole_Meter(double a, double b, double c, double expectedObjetosc)
         {
-            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.meter);
+            var p = new Pudelko(a, b, c);
             Assert.AreEqual(expectedObjetosc, p.Pole);
 
         }
@@ -488,7 +488,7 @@ namespace PudelkoUnitTests
         [DataRow(3.5, 29.8, 89.2, 0.614932)]
         public void Pole_Centimeter(double a, double b, double c, double expectedObjetosc)
         {
-            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.centimeter);
+            var p = new Pudelko(a, b, c, UnitOfMeasure.centimeter);
             Assert.AreEqual(expectedObjetosc, p.Pole);
 
         }
@@ -497,7 +497,7 @@ namespace PudelkoUnitTests
         [DataRow(8491, 5624, 7539, 308.332738)]
         public void Pole_Milimeter(double a, double b, double c, double expectedObjetosc)
         {
-            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.milimeter);
+            var p = new Pudelko(a, b, c, UnitOfMeasure.milimeter);
             Assert.AreEqual(expectedObjetosc, p.Pole);
 
         }
@@ -514,29 +514,44 @@ namespace PudelkoUnitTests
         public void Equals()
         {
             Pudelko p1 = new Pudelko();
-            Pudelko p2 = new Pudelko(10,12, unit: UnitOfMeasure.centimeter);
-            Pudelko p3 = new Pudelko(100, unit: UnitOfMeasure.milimeter);
-            
+            Pudelko p2 = new Pudelko(10, 12, UnitOfMeasure.centimeter);
+            Pudelko p3 = new Pudelko(100,  UnitOfMeasure.milimeter);
 
             Assert.IsTrue(p1.Equals(p3));
             Assert.IsFalse(p1.Equals(p2));
 
-
         }
-        
-       
+
+
         #endregion
 
         #region Operators overloading ===========================
         //ToDo
- [TestMethod, TestCategory("Operators")]
+        [TestMethod, TestCategory("Operators")]
         public void Operators_Same()
         {
             Pudelko p1 = new Pudelko();
             Pudelko p2 = new Pudelko(100, 100, 100, UnitOfMeasure.milimeter);
-            Pudelko p3 = new Pudelko(9, 18, unit: UnitOfMeasure.centimeter);
+            Pudelko p3 = new Pudelko(9, 18, UnitOfMeasure.centimeter);
             Assert.IsTrue(p1 == p2);
             Assert.IsTrue(p2 != p3);
+        }
+
+
+        [TestMethod, TestCategory("Operators")]
+        [DataRow(1,1,1,1,1,1,2,1,1)]
+        [DataRow(5,5,2,5,2,5,4,5,5)]
+        [DataRow(6,3,8,2,4,9,5,6,9)]
+        [DataRow(4,1,6,8,3,5,4,5,8)]
+        
+        public void Operator_Plus(double a, double b, double c, double d, double e,double f, double g, double h, double i)
+        {
+            Pudelko p1 = new Pudelko(a,b,c);
+            Pudelko p2 = new Pudelko(d,e,f);
+            Pudelko p3 = p2 + p1;
+            Pudelko extesion =new Pudelko(g,h,i);
+
+            Assert.AreEqual(extesion,p3);
         }
 
         #endregion 
