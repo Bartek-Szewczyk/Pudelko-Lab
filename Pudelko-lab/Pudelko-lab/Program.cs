@@ -7,8 +7,8 @@ namespace Pudelko_lab
     {
         static void Main()
         {
-           Pudelko p1 = new Pudelko(11.0,UnitOfMeasure.milimeter);
-           Console.WriteLine(p1.ToString("mm"));
+           Pudelko p1 = new Pudelko(8491, 5624, 7539, UnitOfMeasure.milimeter);
+           Console.WriteLine(p1.ToString("m"));
            Console.WriteLine(p1.Objetosc);
            Console.WriteLine(p1.Pole);
         }

@@ -409,5 +409,164 @@ namespace PudelkoUnitTests
 
         #endregion
 
+        #region ToString tests ===================================
+
+        [TestMethod, TestCategory("String representation")]
+        public void ToString_Default_Culture_EN()
+        {
+            var p = new Pudelko(2.5, 9.321);
+            string expectedStringEN = "2.500 m × 9.321 m × 0.100 m";
+
+            Assert.AreEqual(expectedStringEN, p.ToString());
+        }
+
+        [DataTestMethod, TestCategory("String representation")]
+        [DataRow(null, 2.5, 9.321, 0.1, "2.500 m × 9.321 m × 0.100 m")]
+        [DataRow("m", 2.5, 9.321, 0.1, "2.500 m × 9.321 m × 0.100 m")]
+        [DataRow("cm", 2.5, 9.321, 0.1, "250.0 cm × 932.1 cm × 10.0 cm")]
+        [DataRow("mm", 2.5, 9.321, 0.1, "2500 mm × 9321 mm × 100 mm")]
+        public void ToString_Formattable_Culture_EN(string format, double a, double b, double c, string expectedStringRepresentation)
+        {
+            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.meter);
+            Assert.AreEqual(expectedStringRepresentation, p.ToString(format));
+        }
+
+        [TestMethod, TestCategory("String representation")]
+        [ExpectedException(typeof(FormatException))]
+        public void ToString_Formattable_WrongFormat_FormatException()
+        {
+            var p = new Pudelko(1);
+            var stringformatedrepreentation = p.ToString("wrong code");
+        }
+
+        #endregion
+
+
+        #region Pole, Objêtoœæ ===================================
+        // ToDo
+        [DataTestMethod, TestCategory("Objectosc Properties")]
+        [DataRow(1,1,1,1)]
+        [DataRow(3.1,8.67,2.543,68.348211)]
+        public void Objetosc_Meter(double a, double b, double c, double expectedObjetosc)
+        {
+            var p = new Pudelko(a,b,c, unit: UnitOfMeasure.meter);
+            Assert.AreEqual(expectedObjetosc, p.Objetosc);
+
+        }
+        [DataTestMethod, TestCategory("Objectosc Properties")]
+        [DataRow(9, 15, 231, 0.031185)]
+        [DataRow(3.5, 29.8, 89.2, 0.00930356)]
+        [DataRow(2.5,7.6,9.1, 0.0001729)]
+        public void Objetosc_Centimeter(double a, double b, double c, double expectedObjetosc)
+        {
+            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.centimeter);
+            Assert.AreEqual(expectedObjetosc, p.Objetosc);
+
+        }
+        [DataTestMethod, TestCategory("Objectosc Properties")]
+        [DataRow(9, 2543, 71, 0.001624977)]
+        [DataRow(8491, 5624, 7539, 360.012761976)]
+        [DataRow(7462,6835,1048, 53.45090296)]
+        public void Objetosc_Milimeter(double a, double b, double c, double expectedObjetosc)
+        {
+            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.milimeter);
+            Assert.AreEqual(expectedObjetosc, p.Objetosc);
+
+        }
+
+        [DataTestMethod, TestCategory("Objectosc Properties")]
+        [DataRow(1, 1, 1, 6)]
+        [DataRow(3.1, 8.67, 2.543, 113.61622)]
+        public void Pole_Meter(double a, double b, double c, double expectedObjetosc)
+        {
+            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.meter);
+            Assert.AreEqual(expectedObjetosc, p.Pole);
+
+        }
+        [DataTestMethod, TestCategory("Objectosc Properties")]
+        [DataRow(100,100,100,6)]
+        [DataRow(3.5, 29.8, 89.2, 0.614932)]
+        public void Pole_Centimeter(double a, double b, double c, double expectedObjetosc)
+        {
+            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.centimeter);
+            Assert.AreEqual(expectedObjetosc, p.Pole);
+
+        }
+        [DataTestMethod, TestCategory("Objectosc Properties")]
+        [DataRow(1000, 1000, 1000, 6)]
+        [DataRow(8491, 5624, 7539, 308.332738)]
+        public void Pole_Milimeter(double a, double b, double c, double expectedObjetosc)
+        {
+            var p = new Pudelko(a, b, c, unit: UnitOfMeasure.milimeter);
+            Assert.AreEqual(expectedObjetosc, p.Pole);
+
+        }
+
+
+
+
+        #endregion
+
+        #region Equals ===========================================
+        // ToDo
+        #endregion
+
+        #region Operators overloading ===========================
+        //ToDo
+        #endregion
+
+        //#region Conversions =====================================
+        //[TestMethod]
+        //public void ExplicitConversion_ToDoubleArray_AsMeters()
+        //{
+        //    var p = new Pudelko(1, 2.1, 3.231);
+        //    double[] tab = (double[])p;
+        //    Assert.AreEqual(3, tab.Length);
+        //    Assert.AreEqual(p.A, tab[0]);
+        //    Assert.AreEqual(p.B, tab[1]);
+        //    Assert.AreEqual(p.C, tab[2]);
+        //}
+
+        //[TestMethod]
+        //public void ImplicitConversion_FromAalueTuple_As_Pudelko_InMilimeters()
+        //{
+        //    var (a, b, c) = (2500, 9321, 100); // in milimeters, ValueTuple
+        //    Pudelko p = (a, b, c);
+        //    Assert.AreEqual((int)(p.A * 1000), a);
+        //    Assert.AreEqual((int)(p.B * 1000), b);
+        //    Assert.AreEqual((int)(p.C * 1000), c);
+        //}
+
+        //#endregion
+
+        //#region Indexer, enumeration ============================
+        //[TestMethod]
+        //public void Indexer_ReadFrom()
+        //{
+        //    var p = new Pudelko(1, 2.1, 3.231);
+        //    Assert.AreEqual(p.A, p[0]);
+        //    Assert.AreEqual(p.B, p[1]);
+        //    Assert.AreEqual(p.C, p[2]);
+        //}
+
+        //[TestMethod]
+        //public void ForEach_Test()
+        //{
+        //    var p = new Pudelko(1, 2.1, 3.231);
+        //    var tab = new[] { p.A, p.B, p.C };
+        //    int i = 0;
+        //    foreach (double x in p)
+        //    {
+        //        Assert.AreEqual(x, tab[i]);
+        //        i++;
+        //    }
+        //}
+
+        //#endregion
+
+        #region Parsing =========================================
+
+        #endregion
+
     }
 }

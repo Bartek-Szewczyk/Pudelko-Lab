@@ -8,10 +8,10 @@ namespace PudelkoLib
 {
     public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable
     {
-        public readonly double _a = 0.1;
-        public readonly double _b = 0.1;
-        public readonly double _c = 0.1;
-        public readonly UnitOfMeasure _unit;
+        private readonly double _a = 0.1;
+        private readonly double _b = 0.1;
+        private readonly double _c = 0.1;
+        private readonly UnitOfMeasure _unit;
 
         public double A
         {
@@ -115,24 +115,28 @@ namespace PudelkoLib
 
         public string ToString(string format)
         {
-            return ToString(format, CultureInfo.CurrentCulture);
+            return ToString(format, CultureInfo.GetCultureInfo("en-US"));
         }
         public override string ToString()
         {
-            return this.ToString("m", CultureInfo.CurrentCulture);
+            return this.ToString("m", CultureInfo.GetCultureInfo("en-US"));
         }
 
         public string ToString(string format, IFormatProvider formatProvider)
         {
+            if (format == null)
+            {
+                format = "m";
+            }
 
             switch (format.ToUpperInvariant())
             {
                 case "M":
-                    return $"{A.ToString("F3", formatProvider)}{format}\u00D7 {B.ToString("F3", formatProvider)}{format} \u00D7 {C.ToString("F3", formatProvider)}{format} ";
+                    return $"{A.ToString("F3", formatProvider)} {format} \u00D7 {B.ToString("F3", formatProvider)} {format} \u00D7 {C.ToString("F3", formatProvider)} {format}";
                 case "CM":
-                    return $"{ToCm(A).ToString("F1", formatProvider)}{format} \u00D7 {ToCm(B).ToString("F1", formatProvider)}{format} \u00D7 {ToCm(C).ToString("F1", formatProvider)}{format} ";
+                    return $"{ToCm(A).ToString("F1", formatProvider)} {format} \u00D7 {ToCm(B).ToString("F1", formatProvider)} {format} \u00D7 {ToCm(C).ToString("F1", formatProvider)} {format}";
                 case "MM":
-                    return $"{ToMm(A).ToString("F0", formatProvider)}{format} \u00D7 {ToMm(B).ToString("F0", formatProvider)}{format} \u00D7 {ToMm(C).ToString("F0", formatProvider)}{format} ";
+                    return $"{ToMm(A).ToString("F0", formatProvider)} {format} \u00D7 {ToMm(B).ToString("F0", formatProvider)} {format} \u00D7 {ToMm(C).ToString("F0", formatProvider)} {format}";
                 default:
                     throw new FormatException(String.Format("The {0} format string is not supported.", format));
             }
@@ -155,7 +159,7 @@ namespace PudelkoLib
 
         public double Pole
         {
-            get => Math.Round(2 * (A * B + A * C + B * C), 9);
+            get => Math.Round(2 * (A * B + A * C + B * C), 6);
         }
 
 
