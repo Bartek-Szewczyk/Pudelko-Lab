@@ -524,8 +524,13 @@ namespace PudelkoUnitTests
 
         }
         
-        [TestMethod, TestCategory("Equals")]
-        public void Equals_Operators()
+       
+        #endregion
+
+        #region Operators overloading ===========================
+        //ToDo
+ [TestMethod, TestCategory("Operators")]
+        public void Operators_Same()
         {
             Pudelko p1 = new Pudelko();
             Pudelko p2 = new Pudelko(100, 100, 100, UnitOfMeasure.milimeter);
@@ -533,10 +538,7 @@ namespace PudelkoUnitTests
             Assert.IsTrue(p1 == p2);
             Assert.IsTrue(p2 != p3);
         }
-        #endregion
 
-        #region Operators overloading ===========================
-        //ToDo
         #endregion 
 
         //#region Conversions =====================================
