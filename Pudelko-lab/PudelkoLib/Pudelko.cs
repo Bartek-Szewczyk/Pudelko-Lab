@@ -11,7 +11,7 @@ namespace PudelkoLib
         public readonly double _a = 0.1;
         public readonly double _b = 0.1;
         public readonly double _c = 0.1;
-        public readonly UnitOfMeasure unit;
+        public readonly UnitOfMeasure _unit;
 
         public double A
         {
@@ -32,16 +32,17 @@ namespace PudelkoLib
             _a = a;
             _b = b;
             _c = c;
-            CheckRange(a,b,c);
+            _unit = unit;
+            CheckRange(a, b, c);
         }
         public Pudelko()
         {
-            unit = UnitOfMeasure.centimeter;
+            _unit = UnitOfMeasure.centimeter;
         }
 
         public void CheckRange(double a, double b, double c)
         {
-            if (a < 0 || b<0 || c<0)
+            if (a < 0 || b < 0 || c < 0)
             {
                 throw new ArgumentOutOfRangeException();
             }
