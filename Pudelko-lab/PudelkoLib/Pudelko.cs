@@ -17,8 +17,6 @@ namespace PudelkoLib
         {
             get => _a;
         }
-
-
         public double B
         {
             get => _b;
@@ -27,22 +25,82 @@ namespace PudelkoLib
         {
             get => _c;
         }
-        public Pudelko(double a, double b, double c, UnitOfMeasure unit)
+        public Pudelko(double a, double b, double c, UnitOfMeasure unit = UnitOfMeasure.meter)
         {
-            _a = a;
-            _b = b;
-            _c = c;
+            switch (unit)
+            {
+                case UnitOfMeasure.centimeter:
+                    _a = a / 100;
+                    _b = b / 100;
+                    _c = c / 100;
+                    break;
+                case UnitOfMeasure.milimeter:
+                    _a = a / 1000;
+                    _b = b / 1000;
+                    _c = c / 1000;
+                    break;
+                default:
+                    _a = a;
+                    _b = b;
+                    _c = c;
+                    break;
+            }
+
             _unit = unit;
-            CheckRange(a, b, c);
+            CheckRange(A, B, C);
         }
+        public Pudelko(double a, double b, UnitOfMeasure unit = UnitOfMeasure.meter)
+        {
+            switch (unit)
+            {
+                case UnitOfMeasure.centimeter:
+                    _a = a / 100;
+                    _b = b / 100;
+
+
+                    break;
+                case UnitOfMeasure.milimeter:
+                    _a = a / 1000;
+                    _b = b / 1000;
+
+                    break;
+                default:
+                    _a = a;
+                    _b = b;
+
+                    break;
+            }
+
+            _unit = unit;
+            CheckRange(A, B, C);
+        }
+        public Pudelko(double a, UnitOfMeasure unit = UnitOfMeasure.meter)
+        {
+            switch (unit)
+            {
+                case UnitOfMeasure.centimeter:
+                    _a = Math.Round((a / 100), 2);
+                    break;
+                case UnitOfMeasure.milimeter:
+                    _a = a / 1000;
+
+                    break;
+                default:
+                    _a = a;
+                    break;
+            }
+
+            CheckRange(A, B, C);
+        }
+
         public Pudelko()
         {
-            _unit = UnitOfMeasure.centimeter;
+
         }
 
         public void CheckRange(double a, double b, double c)
         {
-            if (a < 0 || b < 0 || c < 0)
+            if (a < 0.001 || b < 0.001 || c < 0.001)
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -51,6 +109,8 @@ namespace PudelkoLib
             {
                 throw new ArgumentOutOfRangeException();
             }
+
+
         }
 
         public string ToString(string format)
@@ -88,6 +148,15 @@ namespace PudelkoLib
             return a * 1000;
         }
 
+        public double Objetosc
+        {
+            get => Math.Round(A * B * C, 9);
+        }
+
+        public double Pole
+        {
+            get => Math.Round(2 * (A * B + A * C + B * C), 9);
+        }
 
 
         public bool Equals(Pudelko other)
