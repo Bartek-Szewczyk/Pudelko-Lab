@@ -17,16 +17,19 @@ namespace PudelkoLib
 
         public double A
         {
-            get => _a;
+            get { return _a; }
         }
+
         public double B
         {
-            get => _b;
+            get { return _b; }
         }
+
         public double C
         {
-            get => _c;
+            get { return _c; }
         }
+
         public Pudelko(double a, double b, double c, UnitOfMeasure unit = UnitOfMeasure.meter)
         {
             switch (unit)
@@ -157,12 +160,12 @@ namespace PudelkoLib
 
         public double Objetosc
         {
-            get => Math.Round(A * B * C, 9);
+            get { return Math.Round(A * B * C, 9); }
         }
 
         public double Pole
         {
-            get => Math.Round(2 * (A * B + A * C + B * C), 6);
+            get { return Math.Round(2 * (A * B + A * C + B * C), 6); }
         }
 
         public bool Equals(Pudelko other)
@@ -234,7 +237,15 @@ namespace PudelkoLib
             else
                 return b;
         }
+        public static explicit operator double[](Pudelko p)
+        {
+            return new double[] { p.A, p.B, p.C };
+        }
 
+        public static implicit operator Pudelko(ValueTuple<int, int ,int> p)
+        {
+            return new Pudelko(p.Item1,p.Item2,p.Item3,UnitOfMeasure.milimeter);
+        }
 
         public IEnumerator GetEnumerator()
         {
