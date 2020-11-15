@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.CompilerServices;
@@ -8,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace PudelkoLib
 {
-    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable
+    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>,IEnumerator<double>
     {
         private readonly double _a = 0.1;
         private readonly double _b = 0.1;
@@ -54,6 +55,7 @@ namespace PudelkoLib
             _unit = unit;
             CheckRange(A, B, C);
         }
+
         public Pudelko(double a, double b, UnitOfMeasure unit = UnitOfMeasure.meter)
         {
             switch (unit)
@@ -79,6 +81,7 @@ namespace PudelkoLib
             _unit = unit;
             CheckRange(A, B, C);
         }
+
         public Pudelko(double a, UnitOfMeasure unit = UnitOfMeasure.meter)
         {
             switch (unit)
@@ -123,10 +126,17 @@ namespace PudelkoLib
         {
             return ToString(format, CultureInfo.GetCultureInfo("en-US"));
         }
+
         public override string ToString()
         {
             return this.ToString("m", CultureInfo.GetCultureInfo("en-US"));
         }
+
+
+
+
+
+
 
         public string ToString(string format, IFormatProvider formatProvider)
         {
@@ -138,11 +148,14 @@ namespace PudelkoLib
             switch (format.ToUpperInvariant())
             {
                 case "M":
-                    return $"{A.ToString("F3", formatProvider)} {format} \u00D7 {B.ToString("F3", formatProvider)} {format} \u00D7 {C.ToString("F3", formatProvider)} {format}";
+                    return
+                        $"{A.ToString("F3", formatProvider)} {format} \u00D7 {B.ToString("F3", formatProvider)} {format} \u00D7 {C.ToString("F3", formatProvider)} {format}";
                 case "CM":
-                    return $"{ToCm(A).ToString("F1", formatProvider)} {format} \u00D7 {ToCm(B).ToString("F1", formatProvider)} {format} \u00D7 {ToCm(C).ToString("F1", formatProvider)} {format}";
+                    return
+                        $"{ToCm(A).ToString("F1", formatProvider)} {format} \u00D7 {ToCm(B).ToString("F1", formatProvider)} {format} \u00D7 {ToCm(C).ToString("F1", formatProvider)} {format}";
                 case "MM":
-                    return $"{ToMm(A).ToString("F0", formatProvider)} {format} \u00D7 {ToMm(B).ToString("F0", formatProvider)} {format} \u00D7 {ToMm(C).ToString("F0", formatProvider)} {format}";
+                    return
+                        $"{ToMm(A).ToString("F0", formatProvider)} {format} \u00D7 {ToMm(B).ToString("F0", formatProvider)} {format} \u00D7 {ToMm(C).ToString("F0", formatProvider)} {format}";
                 default:
                     throw new FormatException(String.Format("The {0} format string is not supported.", format));
             }
@@ -174,12 +187,17 @@ namespace PudelkoLib
             {
                 return false;
             }
+
             if (ReferenceEquals(this, other))
             {
                 return true;
             }
+
             return Objetosc == other.Objetosc && Pole == other.Pole;
         }
+
+
+
 
         public override bool Equals(Object obj)
         {
@@ -216,6 +234,16 @@ namespace PudelkoLib
             return !(p1.Equals(p2));
         }
 
+        public static explicit operator double[](Pudelko p)
+        {
+            return new double[] { p.A, p.B, p.C };
+        }
+
+        public static implicit operator Pudelko(ValueTuple<int, int, int> p)
+        {
+            return new Pudelko(p.Item1, p.Item2, p.Item3, UnitOfMeasure.milimeter);
+        }
+
         public static Pudelko operator +(Pudelko p1, Pudelko p2)
         {
             double[] dim1 = new[] { p1.A, p1.B, p1.C };
@@ -237,21 +265,71 @@ namespace PudelkoLib
             else
                 return b;
         }
-        public static explicit operator double[](Pudelko p)
+
+
+
+        public double this[int indexer]
         {
-            return new double[] { p.A, p.B, p.C };
+            get
+            {
+                if (indexer == 0)
+                {
+                    return A;
+                }
+                else if (indexer == 1)
+                {
+                    return B;
+                }
+                else if (indexer == 2)
+                {
+                    return C;
+                }
+                else
+                {
+                    throw new IndexOutOfRangeException($"The collection can hold only 0, 1, 2 elements.");
+                }
+            }
         }
 
-        public static implicit operator Pudelko(ValueTuple<int, int ,int> p)
+
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return new Pudelko(p.Item1,p.Item2,p.Item3,UnitOfMeasure.milimeter);
+            return GetEnumerator();
         }
 
-        public IEnumerator GetEnumerator()
+        public IEnumerator<double> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return new Pudelko();
         }
+        private int index = 0;
+        public bool MoveNext()
+        {
+            index++;
+
+            if (index < 2)
+                return false;
+            else
+                return true;
+        }
+
+        public void Reset()
+        {
+            index = 0;
+        }
+
+        object IEnumerator.Current => Current;
+
+        public void Dispose()
+        {
+            
+        }
+
+        public double Current { get; }
     }
 
 
+
+
+
 }
+

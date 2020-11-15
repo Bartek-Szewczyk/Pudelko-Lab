@@ -582,30 +582,30 @@ namespace PudelkoUnitTests
 
         #endregion
 
-        //#region Indexer, enumeration ============================
-        //[TestMethod]
-        //public void Indexer_ReadFrom()
-        //{
-        //    var p = new Pudelko(1, 2.1, 3.231);
-        //    Assert.AreEqual(p.A, p[0]);
-        //    Assert.AreEqual(p.B, p[1]);
-        //    Assert.AreEqual(p.C, p[2]);
-        //}
+        #region Indexer, enumeration ============================
+        [TestMethod]
+        public void Indexer_ReadFrom()
+        {
+            var p = new Pudelko(1, 2.1, 3.231);
+            Assert.AreEqual(p.A, p[0]);
+            Assert.AreEqual(p.B, p[1]);
+            Assert.AreEqual(p.C, p[2]);
+        }
 
-        //[TestMethod]
-        //public void ForEach_Test()
-        //{
-        //    var p = new Pudelko(1, 2.1, 3.231);
-        //    var tab = new[] { p.A, p.B, p.C };
-        //    int i = 0;
-        //    foreach (double x in p)
-        //    {
-        //        Assert.AreEqual(x, tab[i]);
-        //        i++;
-        //    }
-        //}
+        [TestMethod]
+        public void ForEach_Test()
+        {
+            var p = new Pudelko(1, 2.1, 3.231);
+            var tab = new[] { p.A, p.B, p.C };
+            int i = 0;
+            foreach (double x in p)
+            {
+                Assert.AreEqual(x, tab[i]);
+                i++;
+            }
+        }
 
-        //#endregion
+        #endregion
 
         #region Parsing =========================================
 
