@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace PudelkoLib
 {
-    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>,IEnumerator<double>
+    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>, IEnumerator<double>
     {
         private readonly double _a = 0.1;
         private readonly double _b = 0.1;
@@ -291,7 +291,6 @@ namespace PudelkoLib
             }
         }
 
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -321,15 +320,41 @@ namespace PudelkoLib
 
         public void Dispose()
         {
-            
+
         }
 
         public double Current { get; }
+
+
+
+        public static Pudelko Parse(string ParseString)
+        {
+            UnitOfMeasure unit;
+            string[] sArray = ParseString.Split(' ');
+
+            switch (sArray[1])
+            {
+                case "mm":
+                    unit = UnitOfMeasure.milimeter;
+                    break;
+                case "cm":
+                    unit = UnitOfMeasure.centimeter;
+                    break;
+                default:
+                    unit = UnitOfMeasure.meter;
+                    break;
+            }
+
+            double a = double.Parse(sArray[0]);
+            double b = double.Parse(sArray[3]);
+            double c = double.Parse(sArray[6]);
+
+
+            return new Pudelko(a, b, c,unit);
+        }
+
+
+
     }
-
-
-
-
-
 }
 

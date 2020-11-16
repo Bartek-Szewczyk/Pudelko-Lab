@@ -609,6 +609,42 @@ namespace PudelkoUnitTests
 
         #region Parsing =========================================
 
+        [TestMethod, TestCategory("Parsing")]
+        [DataRow(1.273,5,6.21, "1.273 m × 5.000 m × 6.210 m")]
+        [DataRow(0.032,9.1,5.42, "0.032 m × 9.100 m × 5.420 m")]
+        [DataRow(1.44,7.213,9, "1.44 m × 7.213 m × 9.000 m")]
+        public void Parse_Meter(double a, double b,double c,string ParseString)
+        {
+            Pudelko p1 = new Pudelko(a,b,c,UnitOfMeasure.meter);
+
+           
+            Assert.AreEqual(p1,Pudelko.Parse(ParseString));
+        }
+
+
+        [TestMethod, TestCategory("Parsing")]
+        [DataRow(1.23, 5, 6.21, "1.23 cm × 5.00 cm × 6.21 cm")]
+        [DataRow(0.32, 9.1, 5.4, "0.32 cm × 9.10 cm × 5.40 cm")]
+        [DataRow(1.4, 7.21, 9, "1.4 cm × 7.21 cm × 9.00 cm")]
+        public void Parse_Centimeter(double a, double b, double c, string ParseString)
+        {
+            Pudelko p1 = new Pudelko(a, b, c, UnitOfMeasure.centimeter);
+
+
+            Assert.AreEqual(p1, Pudelko.Parse(ParseString));
+        }
+
+        [TestMethod, TestCategory("Parsing")]
+        [DataRow(123, 5001, 1621, "123 mm × 5001 mm × 1621 mm")]
+        [DataRow(9332, 91, 1234, "9332 mm × 91 mm × 1234 mm")]
+        [DataRow(1734, 7921, 9, "1734 mm × 7921 mm × 9 mm")]
+        public void Parse_Milimeter(double a, double b, double c, string ParseString)
+        {
+            Pudelko p1 = new Pudelko(a, b, c, UnitOfMeasure.milimeter);
+
+
+            Assert.AreEqual(p1, Pudelko.Parse(ParseString));
+        }
         #endregion
 
     }
