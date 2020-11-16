@@ -94,3 +94,6 @@ C:\Users\48601\Desktop\Studia 3 Semestr\Programowanie Obiekowe\Pudelko\Pudelko-l
 C:\Users\48601\Desktop\Studia 3 Semestr\Programowanie Obiekowe\Pudelko\Pudelko-lab\PudelkoUnitTests\obj\Debug\netcoreapp3.1\PudelkoUnitTests.dll
 C:\Users\48601\Desktop\Studia 3 Semestr\Programowanie Obiekowe\Pudelko\Pudelko-lab\PudelkoUnitTests\obj\Debug\netcoreapp3.1\PudelkoUnitTests.pdb
 C:\Users\48601\Desktop\Studia 3 Semestr\Programowanie Obiekowe\Pudelko\Pudelko-lab\PudelkoUnitTests\obj\Debug\netcoreapp3.1\PudelkoUnitTests.genruntimeconfig.cache
+C:\Users\48601\Desktop\Studia 3 Semestr\Programowanie Obiekowe\Pudelko\Pudelko-lab\PudelkoUnitTests\bin\Debug\netcoreapp3.1\PudelkoApp.exe
+C:\Users\48601\Desktop\Studia 3 Semestr\Programowanie Obiekowe\Pudelko\Pudelko-lab\PudelkoUnitTests\bin\Debug\netcoreapp3.1\PudelkoApp.dll
+C:\Users\48601\Desktop\Studia 3 Semestr\Programowanie Obiekowe\Pudelko\Pudelko-lab\PudelkoUnitTests\bin\Debug\netcoreapp3.1\PudelkoApp.pdb

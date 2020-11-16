@@ -1635,6 +1635,19 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
+      "PudelkoApp/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "PudelkoLib": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/PudelkoApp.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PudelkoApp.dll": {}
+        }
+      },
       "PudelkoLib/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
@@ -5716,6 +5729,11 @@
         "system.xml.xdocument.nuspec"
       ]
     },
+    "PudelkoApp/1.0.0": {
+      "type": "project",
+      "path": "../Pudelko-lab/PudelkoApp.csproj",
+      "msbuildProject": "../Pudelko-lab/PudelkoApp.csproj"
+    },
     "PudelkoLib/1.0.0": {
       "type": "project",
       "path": "../PudelkoLib/PudelkoLib.csproj",
@@ -5727,6 +5745,7 @@
       "MSTest.TestAdapter >= 2.1.0",
       "MSTest.TestFramework >= 2.1.0",
       "Microsoft.NET.Test.Sdk >= 16.5.0",
+      "PudelkoApp >= 1.0.0",
       "PudelkoLib >= 1.0.0",
       "coverlet.collector >= 1.2.0"
     ]
@@ -5762,6 +5781,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
+            "C:\\Users\\48601\\Desktop\\Studia 3 Semestr\\Programowanie Obiekowe\\Pudelko\\Pudelko-lab\\Pudelko-lab\\PudelkoApp.csproj": {
+              "projectPath": "C:\\Users\\48601\\Desktop\\Studia 3 Semestr\\Programowanie Obiekowe\\Pudelko\\Pudelko-lab\\Pudelko-lab\\PudelkoApp.csproj"
+            },
             "C:\\Users\\48601\\Desktop\\Studia 3 Semestr\\Programowanie Obiekowe\\Pudelko\\Pudelko-lab\\PudelkoLib\\PudelkoLib.csproj": {
               "projectPath": "C:\\Users\\48601\\Desktop\\Studia 3 Semestr\\Programowanie Obiekowe\\Pudelko\\Pudelko-lab\\PudelkoLib\\PudelkoLib.csproj"
             }

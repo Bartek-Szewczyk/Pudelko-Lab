@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
+using Pudelko_lab;
 
 namespace PudelkoUnitTests
 {
@@ -459,7 +460,7 @@ namespace PudelkoUnitTests
         [DataRow(2.5, 7.6, 9.1, 0.0001729)]
         public void Objetosc_Centimeter(double a, double b, double c, double expectedObjetosc)
         {
-            var p = new Pudelko(a, b, c,  UnitOfMeasure.centimeter);
+            var p = new Pudelko(a, b, c, UnitOfMeasure.centimeter);
             Assert.AreEqual(expectedObjetosc, p.Objetosc);
 
         }
@@ -469,7 +470,7 @@ namespace PudelkoUnitTests
         [DataRow(7462, 6835, 1048, 53.45090296)]
         public void Objetosc_Milimeter(double a, double b, double c, double expectedObjetosc)
         {
-            var p = new Pudelko(a, b, c,  UnitOfMeasure.milimeter);
+            var p = new Pudelko(a, b, c, UnitOfMeasure.milimeter);
             Assert.AreEqual(expectedObjetosc, p.Objetosc);
 
         }
@@ -515,7 +516,7 @@ namespace PudelkoUnitTests
         {
             Pudelko p1 = new Pudelko();
             Pudelko p2 = new Pudelko(10, 12, UnitOfMeasure.centimeter);
-            Pudelko p3 = new Pudelko(100,  UnitOfMeasure.milimeter);
+            Pudelko p3 = new Pudelko(100, UnitOfMeasure.milimeter);
 
             Assert.IsTrue(p1.Equals(p3));
             Assert.IsFalse(p1.Equals(p2));
@@ -539,19 +540,19 @@ namespace PudelkoUnitTests
 
 
         [TestMethod, TestCategory("Operators")]
-        [DataRow(1,1,1,1,1,1,2,1,1)]
-        [DataRow(5,5,2,5,2,5,4,5,5)]
-        [DataRow(6,3,8,2,4,9,5,6,9)]
-        [DataRow(4,1,6,8,3,5,4,5,8)]
-        
-        public void Operator_Plus(double a, double b, double c, double d, double e,double f, double g, double h, double i)
-        {
-            Pudelko p1 = new Pudelko(a,b,c);
-            Pudelko p2 = new Pudelko(d,e,f);
-            Pudelko p3 = p2 + p1;
-            Pudelko extesion =new Pudelko(g,h,i);
+        [DataRow(1, 1, 1, 1, 1, 1, 2, 1, 1)]
+        [DataRow(5, 5, 2, 5, 2, 5, 4, 5, 5)]
+        [DataRow(6, 3, 8, 2, 4, 9, 5, 6, 9)]
+        [DataRow(4, 1, 6, 8, 3, 5, 4, 5, 8)]
 
-            Assert.AreEqual(extesion,p3);
+        public void Operator_Plus(double a, double b, double c, double d, double e, double f, double g, double h, double i)
+        {
+            Pudelko p1 = new Pudelko(a, b, c);
+            Pudelko p2 = new Pudelko(d, e, f);
+            Pudelko p3 = p2 + p1;
+            Pudelko extesion = new Pudelko(g, h, i);
+
+            Assert.AreEqual(extesion, p3);
         }
 
         #endregion
@@ -610,15 +611,15 @@ namespace PudelkoUnitTests
         #region Parsing =========================================
 
         [TestMethod, TestCategory("Parsing")]
-        [DataRow(1.273,5,6.21, "1.273 m × 5.000 m × 6.210 m")]
-        [DataRow(0.032,9.1,5.42, "0.032 m × 9.100 m × 5.420 m")]
-        [DataRow(1.44,7.213,9, "1.44 m × 7.213 m × 9.000 m")]
-        public void Parse_Meter(double a, double b,double c,string ParseString)
+        [DataRow(1.273, 5, 6.21, "1.273 m × 5.000 m × 6.210 m")]
+        [DataRow(0.032, 9.1, 5.42, "0.032 m × 9.100 m × 5.420 m")]
+        [DataRow(1.44, 7.213, 9, "1.44 m × 7.213 m × 9.000 m")]
+        public void Parse_Meter(double a, double b, double c, string ParseString)
         {
-            Pudelko p1 = new Pudelko(a,b,c,UnitOfMeasure.meter);
+            Pudelko p1 = new Pudelko(a, b, c, UnitOfMeasure.meter);
 
-           
-            Assert.AreEqual(p1,Pudelko.Parse(ParseString));
+
+            Assert.AreEqual(p1, Pudelko.Parse(ParseString));
         }
 
 
@@ -647,5 +648,40 @@ namespace PudelkoUnitTests
         }
         #endregion
 
+        #region Kompresuj ===============================
+
+        [TestMethod, TestCategory("Kompresuj")]
+        [DataRow(1,1,1)]
+        [DataRow(1.63,9.432,1.4)]
+        public void Kompresuj_Meter(double a, double b, double c)
+        {
+            Pudelko p1 = new Pudelko(a,b,c);
+            Pudelko p2 = p1.Kompresuj();
+            Assert.AreEqual(p1.Objetosc,p2.Objetosc);
+
+        }
+
+        [TestMethod, TestCategory("Kompresuj")]
+        [DataRow(1, 1, 1)]
+        [DataRow(1.6, 9.4, 1.4)]
+        public void Kompresuj_Centimeter(double a, double b, double c)
+        {
+            Pudelko p1 = new Pudelko(a, b, c ,UnitOfMeasure.centimeter);
+            Pudelko p2 = p1.Kompresuj();
+            Assert.AreEqual(p1.Objetosc, p2.Objetosc);
+
+        }
+        [TestMethod, TestCategory("Kompresuj")]
+        [DataRow(1, 1, 1)]
+        [DataRow(163, 9432, 1487)]
+        public void Kompresuj_Milimeter(double a, double b, double c)
+        {
+            Pudelko p1 = new Pudelko(a, b, c, UnitOfMeasure.milimeter);
+            Pudelko p2 = p1.Kompresuj();
+            Assert.AreEqual(p1.Objetosc, p2.Objetosc);
+
+        }
+
+        #endregion
     }
 }
