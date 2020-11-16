@@ -651,13 +651,13 @@ namespace PudelkoUnitTests
         #region Kompresuj ===============================
 
         [TestMethod, TestCategory("Kompresuj")]
-        [DataRow(1,1,1)]
-        [DataRow(1.63,9.432,1.4)]
+        [DataRow(1, 1, 1)]
+        [DataRow(1.63, 9.432, 1.4)]
         public void Kompresuj_Meter(double a, double b, double c)
         {
-            Pudelko p1 = new Pudelko(a,b,c);
+            Pudelko p1 = new Pudelko(a, b, c);
             Pudelko p2 = p1.Kompresuj();
-            Assert.AreEqual(p1.Objetosc,p2.Objetosc);
+            Assert.AreEqual(p1.Objetosc, p2.Objetosc);
 
         }
 
@@ -666,7 +666,7 @@ namespace PudelkoUnitTests
         [DataRow(1.6, 9.4, 1.4)]
         public void Kompresuj_Centimeter(double a, double b, double c)
         {
-            Pudelko p1 = new Pudelko(a, b, c ,UnitOfMeasure.centimeter);
+            Pudelko p1 = new Pudelko(a, b, c, UnitOfMeasure.centimeter);
             Pudelko p2 = p1.Kompresuj();
             Assert.AreEqual(p1.Objetosc, p2.Objetosc);
 
@@ -682,6 +682,10 @@ namespace PudelkoUnitTests
 
         }
 
-        #endregion
+        #endregion========
+
     }
+
+
 }
+
